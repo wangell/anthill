@@ -11,6 +11,8 @@ Usage
 
 `./anthill Examples/pentagon-stripe.ah`
 
+It is currently set to output to anthill.html
+
 Language
 --------
 
