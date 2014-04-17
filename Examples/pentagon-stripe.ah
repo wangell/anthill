@@ -1,9 +1,9 @@
 pendown;
-forward 20;
+forward (head [20,40,60]);
 penup;
-forward 20;
+forward (sum [5,5,5,5]);
 pendown;
-forward 20;
+forward (* 4 5);
 penup;
 forward 20;
 pendown;

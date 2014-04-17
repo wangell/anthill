@@ -1,5 +1,6 @@
 module Evaluator where
 
+import qualified Data.Map as M
 import Parser
 
 type Pos = (Int, Int)
@@ -38,7 +39,9 @@ moveForward (x, y) angle mov = (newX, newY)
 evalExpr :: LogoExpr -> LogoExpr
 evalExpr e = case e of
 	(LogoPrim p) -> LogoPrim $ evalPrim p
-	(LogoFunc f a) -> LogoFunc f (map evalExpr a)
+	(LogoFunc f a) -> case (M.lookup f builtInFuncs) of
+						(Just func) -> func (map evalExpr a)
+						Nothing -> error "No function exists"
 
 evalMove :: Ant -> LogoCommand -> Ant
 evalMove a@(Ant pos angle pens maxx maxy minx miny canv) c = case c of
@@ -74,3 +77,38 @@ stringify e = "y"
 
 evalProgram :: [LogoStmt] -> Ant
 evalProgram p = foldl evalStmt defaultAnt p
+
+-- Builtin Functions --
+
+builtInFuncs :: M.Map String ([LogoExpr] -> LogoExpr)
+builtInFuncs = M.fromList $ [ ("+", addFunc)
+							, ("-", subFunc)
+							, ("*", multFunc)
+							, ("sum", sumFunc)
+							, ("head", headFunc)
+							, ("tail", tailFunc) ]
+
+addFunc :: [LogoExpr] -> LogoExpr
+addFunc ((LogoPrim (LogoNum a)):(LogoPrim (LogoNum b)):[]) = (LogoPrim (LogoNum (a+b)))
+
+subFunc :: [LogoExpr] -> LogoExpr
+subFunc ((LogoPrim (LogoNum a)):(LogoPrim (LogoNum b)):[]) = (LogoPrim (LogoNum (a-b)))
+
+multFunc :: [LogoExpr] -> LogoExpr
+multFunc ((LogoPrim (LogoNum a)):(LogoPrim (LogoNum b)):[]) = (LogoPrim (LogoNum (a*b)))
+
+sumFunc :: [LogoExpr] -> LogoExpr
+sumFunc (LogoPrim (LogoList []) : []) = LogoPrim (LogoNum 0)
+sumFunc (LogoPrim (LogoList (x:xs)) : []) = addFunc [x, sumFunc ([LogoPrim $LogoList xs]) ]
+
+--mapFunc :: [LogoExpr] -> LogoExpr
+--mapFunc (LogoPrim (LogoList []) : []) = LogoPrim (LogoList [])
+--mapFunc (f:LogoPrim (LogoList xs) : []) = LogoPrim $ LogoList $ map (\x -> LogoFunc f [x]) xs
+
+headFunc :: [LogoExpr] -> LogoExpr
+headFunc (LogoPrim (LogoList []) : []) = error "List is too short"
+headFunc (LogoPrim (LogoList (x:xs)) : []) = x
+
+tailFunc :: [LogoExpr] -> LogoExpr
+tailFunc (LogoPrim (LogoList []) : []) = error "List is too short"
+tailFunc (LogoPrim (LogoList (x:xs)) : []) = LogoPrim $ LogoList xs
