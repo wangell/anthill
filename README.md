@@ -7,6 +7,8 @@ It's programmed in Haskell using Attoparsec for lexing/parsing.
 Usage
 -----
 
+`anthill` is the interpreter
+
 `./anthill filename`
 
 `./anthill Examples/pentagon-stripe.ah`
@@ -16,7 +18,7 @@ It is currently set to output to anthill.html
 Language
 --------
 
-Primitives
+###Primitives###
 
 Integers : `2`
 
@@ -26,7 +28,7 @@ Lists : `[1,2,3]`
 
 Strings (lists of characters): `"hello"` == `['h','e','l','l','o']`
 
-Binary Operators
+###Binary Operators###
 
 `+ 2 3`
 
@@ -38,7 +40,7 @@ Binary Operators
 
 `sum [expr]`
 
-Turtle Commands
+###Turtle Commands###
 
 `forward (expr)`
 
