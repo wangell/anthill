@@ -76,7 +76,14 @@ parseFunc = do
 	return $ LogoFunc (B.unpack func) args
 
 parseExpr :: Parser LogoExpr
-parseExpr = parsePrim <|> parseFunc
+parseExpr = parsePexpr <|> parsePrim <|> parseFunc
+
+parsePexpr :: Parser LogoExpr
+parsePexpr = do
+	char '('
+	e <- parseExpr
+	char ')'
+	return e
 
 --- Statement Parsing
 
