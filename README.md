@@ -8,6 +8,7 @@ Usage
 -----
 
 `./anthill filename`
+
 `./anthill Examples/pentagon-stripe.ah`
 
 Language
