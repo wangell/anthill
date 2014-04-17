@@ -2,6 +2,13 @@ anthill
 =======
 
 anthill is a Logo-like language that generates turtle graphics in HTML5/Javascript via the canvas element.
+It's programmed in Haskell using Attoparsec for lexing/parsing.
+
+Usage
+-----
+
+`./anthill filename`
+`./anthill Examples/pentagon-stripe.ah`
 
 Language
 --------
