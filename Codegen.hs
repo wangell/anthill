@@ -22,7 +22,7 @@ genLine (p1,p2) = "anthill.moveTo" ++ (show p1) ++ ";\n" ++ "anthill.lineTo" ++ 
 genHtmlFile :: Ant -> IO ()
 genHtmlFile a = writeFile "anthill.html" (genCode a)
 
-testProg = evalProgram [
+testProg = [
 	 LogoCommand Pendown
 	,LogoCommand (Turn (LogoPrim (LogoNum 90)))
 	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
@@ -34,18 +34,11 @@ testProg = evalProgram [
 	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
 	]
 
-triangleProg = evalProgram [
+triangleProg =  [
 	 LogoCommand Pendown
-	,LogoCommand (Turn (LogoPrim (LogoNum 60)))
 	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
-	,LogoCommand (Turn (LogoPrim (LogoNum 60)))
+	,LogoCommand (Turn (LogoPrim (LogoNum (60))))
 	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
-	,LogoCommand (Turn (LogoPrim (LogoNum 60)))
-	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
-	,LogoCommand (Turn (LogoPrim (LogoNum 60)))
-	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
-	,LogoCommand (Turn (LogoPrim (LogoNum 60)))
-	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
-	,LogoCommand (Turn (LogoPrim (LogoNum 60)))
+	,LogoCommand (Turn (LogoPrim (LogoNum (60))))
 	,LogoCommand (Forward (LogoPrim (LogoNum 50)))
 	]

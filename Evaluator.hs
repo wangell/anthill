@@ -32,8 +32,8 @@ evalPrim p = case p of
 moveForward :: Pos -> Int -> Int -> Pos
 moveForward (x, y) angle mov = (newX, newY)
 	where
-		newX = round $ (fromIntegral x) + (fromIntegral mov) * sin ((pi/180) * (fromIntegral angle))
-		newY = round $ (fromIntegral y) + (fromIntegral mov) * cos ((pi/180) * (fromIntegral angle))
+		newX = round $ (fromIntegral x) + (fromIntegral mov) * cos ((pi/180) * (fromIntegral angle))
+		newY = round $ (fromIntegral y) + (fromIntegral mov) * sin ((pi/180) * (fromIntegral angle))
 
 evalExpr :: LogoExpr -> LogoExpr
 evalExpr e = case e of
@@ -44,7 +44,7 @@ evalMove :: Ant -> LogoCommand -> Ant
 evalMove a@(Ant pos angle pens maxx maxy minx miny canv) c = case c of
 	(Forward (LogoPrim (LogoNum n))) -> if ((penState a) == Down)
 					then (Ant nextPos angle pens maxx maxy minx miny (canv ++ [(pos, nextPos)]))
-					else a
+					else (Ant nextPos angle pens maxx maxy minx miny canv)
 						where
 							nextPos = moveForward pos angle n
 	(Backward e) -> if ((penState a) == Down)
@@ -54,7 +54,7 @@ evalMove a@(Ant pos angle pens maxx maxy minx miny canv) c = case c of
 							nextPos = (1,1)--moveForward pos angle n
 
 turn :: LogoExpr -> Int -> Int
-turn (LogoPrim (LogoNum n)) c = n + c
+turn (LogoPrim (LogoNum n)) c = (180 - n) + c
 
 evalCommand :: Ant -> LogoCommand -> Ant
 evalCommand a@(Ant pos an pen maxx maxy minx miny canv) s = case s of

@@ -1,0 +1,6 @@
+pendown;
+forward 50;
+turn 60;
+forward 50;
+turn 60;
+forward 50;

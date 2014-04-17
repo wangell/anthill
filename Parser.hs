@@ -70,7 +70,7 @@ parsePrim = do
 --Fix spacing issue
 parseFunc :: Parser LogoExpr
 parseFunc = do
-	func <- Data.Attoparsec.Char8.takeWhile (isAlpha_ascii)
+	func <- Data.Attoparsec.Char8.takeWhile (/=' ')
 	space
 	args <- parseExpr `sepBy` (space)
 	return $ LogoFunc (B.unpack func) args
