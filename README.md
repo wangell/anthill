@@ -16,24 +16,36 @@ It is currently set to output to anthill.html
 Language
 --------
 
-Built-in Functions
+Primitives
+
+Integers : `2`
+
+Characters : `'c'`
+
+Lists : `[1,2,3]`
+
+Strings (lists of characters): `"hello"` == `['h','e','l','l','o']`
 
 Binary Operators
-+,-,\*
 
-head [List]
+`+ 2 3`
 
-Input: `head [1,2,3]`
+`(((- 4 5)))`
 
-Output: `1`
+`head [1,2,3]`
 
-tail [List]
-sum [List]
+`tail [expr]`
+
+`sum [expr]`
 
 Turtle Commands
 
-forward [expr]
-backard [expr]
-turn [expr]
-pendown
-penup
+`forward (expr)`
+
+`backard (expr)`
+
+`turn (expr)`
+
+`pendown`
+
+`penup`
