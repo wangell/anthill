@@ -2,36 +2,52 @@ anthill
 =======
 
 anthill is a Logo-like language that generates turtle graphics in HTML5/Javascript via the canvas element.
-It's programmed in Haskell using Attoparsec for lexing/parsing.
+The interpreter is programmed in Haskell using Attoparsec for lexing/parsing.
 
 Usage
 -----
+
+`anthill` is the interpreter
 
 `./anthill filename`
 
 `./anthill Examples/pentagon-stripe.ah`
 
+It is currently set to output to anthill.html
+
 Language
 --------
 
-Built-in Functions
+###Primitives###
 
-Binary Operators
-+,-,\*
+Integers : `2`
 
-head [List]
+Characters : `'c'`
 
-Input: `head [1,2,3]`
+Lists : `[1,2,3]`
 
-Output: `1`
+Strings (lists of characters): `"hello"` == `['h','e','l','l','o']`
 
-tail [List]
-sum [List]
+###Binary Operators###
 
-Turtle Commands
+`+ 2 3`
 
-forward [expr]
-backard [expr]
-turn [expr]
-pendown
-penup
+`(((- 4 5)))`
+
+`head [1,2,3]`
+
+`tail [expr]`
+
+`sum [expr]`
+
+###Turtle Commands###
+
+`forward (expr)`
+
+`backard (expr)`
+
+`turn (expr)`
+
+`pendown`
+
+`penup`
