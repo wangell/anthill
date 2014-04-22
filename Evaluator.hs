@@ -18,6 +18,8 @@ data Ant = Ant {  turtlePos :: Pos
 			, canvas :: [(Pos,Pos)] }
 				deriving (Show)
 
+--data AntEvaluator = SuccessEval Ant | FailedEval String
+
 defaultAnt :: Ant
 defaultAnt = Ant (120,120) 0 Up 0 0 0 0 [] 
 
@@ -84,6 +86,7 @@ builtInFuncs :: M.Map String ([LogoExpr] -> LogoExpr)
 builtInFuncs = M.fromList $ [ ("+", addFunc)
 							, ("-", subFunc)
 							, ("*", multFunc)
+							--, ("==", eqFunc)
 							, ("sum", sumFunc)
 							, ("head", headFunc)
 							, ("tail", tailFunc) ]
@@ -99,7 +102,7 @@ multFunc ((LogoPrim (LogoNum a)):(LogoPrim (LogoNum b)):[]) = (LogoPrim (LogoNum
 
 sumFunc :: [LogoExpr] -> LogoExpr
 sumFunc (LogoPrim (LogoList []) : []) = LogoPrim (LogoNum 0)
-sumFunc (LogoPrim (LogoList (x:xs)) : []) = addFunc [x, sumFunc ([LogoPrim $LogoList xs]) ]
+sumFunc (LogoPrim (LogoList (x:xs)) : []) = addFunc [x, sumFunc ([LogoPrim $ LogoList xs]) ]
 
 --mapFunc :: [LogoExpr] -> LogoExpr
 --mapFunc (LogoPrim (LogoList []) : []) = LogoPrim (LogoList [])
@@ -112,3 +115,10 @@ headFunc (LogoPrim (LogoList (x:xs)) : []) = x
 tailFunc :: [LogoExpr] -> LogoExpr
 tailFunc (LogoPrim (LogoList []) : []) = error "List is too short"
 tailFunc (LogoPrim (LogoList (x:xs)) : []) = LogoPrim $ LogoList xs
+
+--eqFunc :: [LogoExpr] -> LogoExpr
+--eqFunc (x:y:[]) = case evalExpr l of
+--	LogoPrim p ->
+
+--inListFunc :: [LogoExpr] -> LogoExpr
+--eqFunc

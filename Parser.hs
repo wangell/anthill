@@ -16,18 +16,18 @@ import qualified Data.List
 import qualified Data.ByteString.Char8 as B
 
 data LogoPrim = LogoNum Int | LogoChar Char | LogoBool Bool | LogoList [LogoExpr] 
-	deriving (Show)
+	deriving (Show, Eq)
 
 --LogoFunc always returns an expression
 data LogoExpr = LogoPrim LogoPrim | LogoFunc String [LogoExpr]
-	deriving (Show)
+	deriving (Show, Eq)
 
 data LogoCommand = Forward LogoExpr | Backward LogoExpr | Turn LogoExpr | Pendown | Penup | Print LogoExpr
-	deriving (Show)
+	deriving (Show, Eq)
 
 --LogoCommand doesn't return anything
 data LogoStmt = LogoExpr LogoExpr | LogoCommand LogoCommand
-	deriving (Show)
+	deriving (Show, Eq)
 
 --- Expresion Parsing
 parseNumber :: Parser LogoPrim

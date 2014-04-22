@@ -19,8 +19,8 @@ genCode a = printHtml canvStart ++ "\n<script>var c = document.getElementById(\"
 genLine :: (Pos, Pos) -> String
 genLine (p1,p2) = "anthill.moveTo" ++ (show p1) ++ ";\n" ++ "anthill.lineTo" ++ (show p2) ++ ";\n" ++ "anthill.stroke();\n"
 
-genHtmlFile :: Ant -> IO ()
-genHtmlFile a = writeFile "anthill.html" (genCode a)
+genHtmlFile :: Ant -> FilePath -> IO ()
+genHtmlFile a f = writeFile f (genCode a)
 
 testProg = [
 	 LogoCommand Pendown
