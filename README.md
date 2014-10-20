@@ -34,6 +34,8 @@ Strings (lists of characters): `"hello"` == `['h','e','l','l','o']`
 
 `(((- 4 5)))`
 
+###Other Operators###
+
 `head [1,2,3]`
 
 `tail [expr]`
